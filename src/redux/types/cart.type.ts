@@ -7,4 +7,6 @@ type TCartItem = {
 
 export type TCartState = {
   items: TCartItem[]
+  status: 'idle' | 'loading' | 'succeed' | 'failed'
+  error: any
 }

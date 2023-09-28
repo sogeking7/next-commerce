@@ -1,6 +1,6 @@
 export type TUser = {
   id?: string
-  username?: string
-  firstName?: string
-  email?: any
+  username?: string | null
+  imageUrl?: string | null
+  firstName?: string | null
 }

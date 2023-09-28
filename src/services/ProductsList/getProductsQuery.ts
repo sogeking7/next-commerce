@@ -1,5 +1,5 @@
 import axios from 'axios'
 
 export const getProductsQuery = async () => {
-  return await axios('/api/product').then((res) => res.data)
+  return await axios.get('/api/product').then((res) => res.data)
 }

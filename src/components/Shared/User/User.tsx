@@ -1,34 +1,53 @@
-import { UserButton, auth, clerkClient, currentUser } from '@clerk/nextjs'
-import { User } from '@clerk/nextjs/server'
+// 'use client'
+import React, { useEffect } from 'react'
+import { SignInButton, UserButton, auth, useUser } from '@clerk/nextjs'
 import { IconUser } from '@tabler/icons-react'
-import Link from 'next/link'
-import React from 'react'
-import { redirect } from 'next/navigation'
-import { useAppSelector, useAppDispatch } from '@/redux/hooks'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { setUser } from '@/redux/features/user/userSlice'
-import axios from 'axios'
+import Image from 'next/image'
+import Link from 'next/link'
 
-export const  MyUser = async () => {
-  //     const { userId } = auth()
+// export const MyUser = () => {
+//   const { user } = useUser()
 
-  //     if (!userId) {
-  //     redirect('/sign-in')
-  //   }
+//   const User = useAppSelector((state) => state.user)
+//   const dispatch = useAppDispatch()
 
-  // const user = await clerkClient.users.getUser(userId)
+//   useEffect(() => {
+//     dispatch(
+//       setUser({
+//         id: user?.id,
+//         firstName: user?.firstName,
+//         username: user?.username,
+//         imageUrl: user?.imageUrl,
+//       }),
+//     )
+//   }, [user])
 
-  const user = useAppSelector((state) => state.user)
-  const dispatch = useAppDispatch()
+//   return (
+//     <>
+//       {User ? (
+//         <Link href="#">
+//           <Image
+//             alt="user"
+//             className="rounded-full"
+//             width={32}
+//             height={32}
+//             quality={100}
+//             src={User.imageUrl}
+//           />
+//         </Link>
+//       ) : (
+//         <IconUser />
+//       )}
+//     </>
+//   )
+// }
 
-axios
-    .get('/api/auth')
-    .then((res) => {
-        console.log(res)
-      dispatch(setUser(user))
-    })
-    .catch((error) => {
-      console.error('Error fetching user:', error)
-    })
-
-  return <>{user.firstName}</>
+export const MyUser = () => {
+  const { userId }: { userId: string | null } = auth()
+  if (!userId) {
+    return <SignInButton />
+  }
+  return <UserButton />
 }

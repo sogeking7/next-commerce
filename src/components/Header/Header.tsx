@@ -1,11 +1,13 @@
 import React from 'react'
 import Link from 'next/link'
 import { IconHeart } from '@tabler/icons-react'
-import { UserButton } from '@clerk/nextjs'
+// import { UserButton } from '@clerk/nextjs'
 import { ReduxProvider } from '@/redux/provider'
 import CartButton from './CartButton'
 import { Input } from '@/components/ui/input'
 import Logo from './Logo'
+import { MyUser } from '../Shared/User/User'
+import { SignInButton, SignedIn, UserButton } from '@clerk/nextjs'
 
 export default function Header() {
   return (
@@ -22,7 +24,7 @@ export default function Header() {
           <Link href="/">
             <IconHeart />
           </Link>
-          <UserButton />
+          <MyUser />
         </nav>
       </nav>
     </header>
